@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root{
+    --base-colour: #EDEDED;
+}
+
+body{
+    font-family: Inter, sans-serif;
+    background-color: var(--base-colour);
+}
+
+header{
+    padding: 0;
+}
+
+h2{
+    font-size: 34px;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between; /* Pushes title to left and nav to right */
+    align-items: center;            /* Vertically centers them */
+    padding: 10px 20px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;                      /* Adds space between the buttons */
+}
+
+.btn1 {
+    font-size: 24px;
+    text-decoration: none;
+    padding: 8px 16px;
+    color: #DC8B00;
+    border-radius: 4px;
+}
+
+.btn1:hover {
+    background-color: #DC8B00; /*Colours invert on hover */
+    color: white;
+}
+
+.btn2:hover {
+    background-color: #0085D7; /*Colours invert on hover */
+    color: white;
+}
+
+.btn2 {
+    font-size: 24px;
+    text-decoration: none;
+    padding: 8px 16px;
+    color: #0085D7;
+    border-radius: 4px;
+}
+
+.addbtn {
+    font-size: 24px;
+    text-decoration: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+}
+
+.greenbtn {
+    font-size: 24px;
+    text-decoration: none;
+    background-color: #28a745;
+    color: white;
+    border-radius: 4px;
+}
+
+.greenbtn:enabled {
+    cursor: pointer;
+}
+
+.greenbtn:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc; 
+    color: #666666;
+    opacity: 0.6; 
+}
+
+.redbtn {
+    font-size: 24px;
+    text-decoration: none;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 4px;
+}
+
+.redbtn:enabled {
+    cursor: pointer;
+}
+
+.redbtn:disabled {
+    cursor: not-allowed;
+    background-color: #cccccc; 
+    color: #666666;
+    opacity: 0.6; 
+}
+
+.bluebtn {
+    font-size: 24px;
+    text-decoration: none;
+    background-color: var(--base-colour);
+    color: #007bff;
+    border-radius: 4px;
+}
+
+.bluebtn:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.bluebtn:enabled {
+    cursor: pointer;
+}
+
+.container {
+    display: flex;
+}
+
+.container div{
+    margin: 0px 10px 0px 10px;
+}
