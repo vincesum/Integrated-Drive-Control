@@ -62,25 +62,29 @@ class Transfer_logger(Logger):
         self.recordCount = 0
         self.totalbytes = 0
 
-    def record(self, isWriting, bytes):
+    def record(self, isWriting, bytes, isError=False):
+        if isError:
+            writer.writerow(bytes)
         self.recordCount += 1
         self.totalbytes += bytes
         if (self.recordCount >= 30):
             bytes_per_sec = self.totalbytes / self.recordCount
             avg_speed = self.convertUnits(bytes_per_sec)[:-2]
             timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+            try:
+                with open(self.path, "a", newline='') as f:
+                    writer = csv.writer(f)
+                
+                    if isWriting:
+                        # row format: [Column 1, Column 2, Column 3]
+                        writer.writerow([timestamp, "Write", avg_speed])
+                    else:
+                        writer.writerow([timestamp, "Read", avg_speed]) 
 
-            with open(self.path, "a", newline='') as f:
-                writer = csv.writer(f)
-            
-                if isWriting:
-                    # row format: [Column 1, Column 2, Column 3]
-                    writer.writerow([timestamp, "Write", avg_speed])
-                else:
-                    writer.writerow([timestamp, "Read", avg_speed]) 
-
-            self.recordCount = 0
-            self.totalbytes = 0
+                self.recordCount = 0
+                self.totalbytes = 0
+            except Exception as e:
+                print(e)
     
     def convertUnits(self, totalBytes):
         powers_of_ten = 0

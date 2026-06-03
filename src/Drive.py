@@ -353,7 +353,7 @@ class Drive():
                     print(f"\n[FATAL] Drive disconnected: {e}", flush=True)
                     print("[*] Pausing write thread and waiting for reconnect...", flush=True)
                     error_printed = True # Set flag to True so it doesn't print again
-                
+                logger.record(isWriting=True, bytes=e, isError=True)
                 # Wait 2 seconds before the outer loop tries to open the drive again
                 time.sleep(2)
                 
@@ -453,7 +453,7 @@ class Drive():
                     print(f"\n[FATAL] Drive disconnected during read: {e}", flush=True)
                     print("[*] Pausing read thread and waiting for reconnect...", flush=True)
                     error_printed = True
-                
+                logger.record(isWriting=False, bytes=e, isError=True)
                 time.sleep(2)
                 
                 if hasTime and (time.time() - start_time >= totalSeconds):
@@ -521,6 +521,7 @@ class Drive():
             else:
                 # If it's a different hardware error (like a disconnected cable)
                 print(f"\n[!] Hardware Error during write: {e}")
+                logger.record(isWriting=True, bytes=e, isError=True)
 
     def randomRead(self, startLBA=0, endLBA=None, patternID=None, hour=None, min=None, sec=None, logger=None):
         if (endLBA == None):
@@ -577,7 +578,8 @@ class Drive():
                 print(f"\n[*] Hit physical end of disk platters!")
             else:
                 # If it's a different hardware error (like a disconnected cable)
-                print(f"\n[!] Hardware Error during write: {e}")
+                print(f"\n[!] Hardware Error during read: {e}")
+                logger.record(isWriting=False, bytes=e, isError=True)
 
     def printChunkToBytes(self, chunkCount):
         totalBytes = chunkCount * self.blockSize

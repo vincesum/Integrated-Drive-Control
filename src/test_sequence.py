@@ -169,11 +169,11 @@ class test_sequence():
             print(e)
         
 
-    
-        
+# --- Main Test Script Starts Here ---    
+
 if __name__ == "__main__":
     # Initialise test sequence with blocksize
-    test = test_sequence(blocksize=65536)
+    test = test_sequence(blocksize=4096)
 
     # Set up drive serial port for TCC log and online mode
     threading.Thread(target=test.readFromUART, daemon=True).start()
